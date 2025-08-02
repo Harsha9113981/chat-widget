@@ -2,65 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Agora Chat Demo</title>
-  <script src="https://cdn.agora.io/sdk/release/AgoraRTM.latest.min.js"></script>
+  <title>Community Chat</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@connectycube/chat-ui-kit"></script>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    #chat { max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-    .message { margin: 5px 0; }
-    input, button { padding: 8px; margin: 5px 0; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #login-form {
+      padding: 20px;
+      text-align: center;
+    }
+    #chat-container {
+      height: 100vh;
+    }
   </style>
 </head>
 <body>
-  <h2>Agora Real-Time Chat</h2>
 
-  <div>
-    <input id="username" placeholder="Enter your name" />
-    <button onclick="login()">Login</button>
-  </div>
+<div id="login-form">
+  <h2>Login to Chat</h2>
+  <input type="text" id="login" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="startChat()">Login</button>
+</div>
 
-  <div id="chat-container" style="display:none;">
-    <div id="chat"></div>
-    <input id="msg" placeholder="Type message..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
+<div id="chat-container" style="display:none;"></div>
 
-  <script>
-    const APP_ID = "your-agora-app-id"; // Replace with your Agora App ID
-    let client, channel;
+<script>
+  function startChat() {
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
 
-    async function login() {
-      const userName = document.getElementById('username').value;
-      if (!userName) return alert("Enter username");
-
-      client = AgoraRTM.createInstance(APP_ID);
-      await client.login({ uid: userName });
-
-      // Join channel
-      channel = client.createChannel("community-chat");
-      await channel.join();
-
-      document.getElementById("chat-container").style.display = "block";
-
-      // Message listener
-      channel.on("ChannelMessage", ({ text }, senderId) => {
-        const chat = document.getElementById("chat");
-        const msgDiv = document.createElement("div");
-        msgDiv.className = "message";
-        msgDiv.innerHTML = `<strong>${senderId}:</strong> ${text}`;
-        chat.appendChild(msgDiv);
-        chat.scrollTop = chat.scrollHeight;
-      });
+    if (!login || !password) {
+      alert('Enter both login and password');
+      return;
     }
 
-    async function sendMessage() {
-      const msg = document.getElementById("msg").value;
-      if (!msg) return;
-      await channel.sendMessage({ text: msg });
-      document.getElementById("msg").value = "";
-    }
-  </script>
+    const credentials = {
+      appId: 9309, // Replace with your actual App ID
+      authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA', // Replace with your actual Auth Key
+      userLogin: login,
+      userPassword: password,
+      showOnlineUsersTab: true,
+      splitView: true,
+    };
+
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('chat-container').style.display = 'block';
+
+    const chatContainer = document.getElementById('chat-container');
+    ReactDOM.createRoot(chatContainer).render(
+      React.createElement(ConnectyCubeChatWidget, credentials)
+    );
+  }
+</script>
+
 </body>
 </html>
+
 
 
