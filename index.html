@@ -1,68 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Community Chat</title>
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@connectycube/chat-ui-kit"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ConnectyCube Chat Widget</title>
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-    }
-    #login-form {
-      padding: 20px;
-      text-align: center;
-    }
-    #chat-container {
       height: 100vh;
+      width: 100vw;
+    }
+    #ConnectyCube_chat-widget {
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 <body>
 
-<div id="login-form">
-  <h2>Login to Chat</h2>
-  <input type="text" id="login" placeholder="Username" />
-  <input type="password" id="password" placeholder="Password" />
-  <button onclick="startChat()">Login</button>
-</div>
+  <!-- Container where chat widget will be rendered -->
+  <div id="ConnectyCube_chat-widget"></div>
 
-<div id="chat-container" style="display:none;"></div>
+  <!-- React and ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 
-<script>
-  function startChat() {
-    const login = document.getElementById('login').value;
-    const password = document.getElementById('password').value;
+  <!-- ConnectyCube Core & Widget -->
+  <script src="https://unpkg.com/connectycube@4/dist/connectycube.min.js"></script>
+  <script src="https://unpkg.com/@connectycube/chat-widget@latest/dist/index.umd.js"></script>
 
-    if (!login || !password) {
-      alert('Enter both login and password');
-      return;
-    }
-
-    const credentials = {
-      appId: 9309, // Replace with your actual App ID
-      authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA', // Replace with your actual Auth Key
-      userLogin: login,
-      userPassword: password,
+  <!-- Init Script -->
+  <script>
+    const props = {
+      appId: 9309,
+      authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA',
+      userId: '45',  // Replace with actual test user ID from ConnectyCube dashboard
+      userName: 'Samuel',  // Display name for the user
       showOnlineUsersTab: true,
       splitView: true,
     };
 
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('chat-container').style.display = 'block';
-
-    const chatContainer = document.getElementById('chat-container');
-    ReactDOM.createRoot(chatContainer).render(
-      React.createElement(ConnectyCubeChatWidget, credentials)
+    const chatWidgetContainer = document.getElementById('ConnectyCube_chat-widget');
+    ReactDOM.createRoot(chatWidgetContainer).render(
+      React.createElement(ConnectyCubeChatWidget, props)
     );
-  }
-</script>
-
+  </script>
 </body>
 </html>
+
+
+
 
 
 
