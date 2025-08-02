@@ -2,27 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ConnectyCube Chat Widget</title>
+  <title>ConnectyCube Demo Chat Widget</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/connectycube@4/dist/connectycube.min.js"></script>
   <script src="https://unpkg.com/@connectycube/chat-widget@latest/dist/index.umd.js"></script>
   <style>
-    body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
-    #ConnectyCube_chat-widget { width: 100%; height: 100%; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #ConnectyCube_chat-widget {
+      height: 100%;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <script>
+    // Use demo user 1
     const props = {
-      appId: 9309, // your own App ID
-      authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA', // your Auth Key
-      userId: '45',         // replace with valid user ID from dashboard
-      userName: 'Samuel',   // display name
+      appId: 3972,
+      authKey: 'Rz9DxJHrj-RK9vU',
+      userId: '1152584',
+      userName: 'Test User 1', // You can change this for other demo users
       showOnlineUsersTab: true,
-      splitView: true,
-      enableUrlPreview: true,
       showNotifications: true,
+      enableUrlPreview: true,
+      splitView: true,
     };
 
     const container = document.createElement('div');
@@ -35,6 +44,7 @@
   </script>
 </body>
 </html>
+
 
 
 
