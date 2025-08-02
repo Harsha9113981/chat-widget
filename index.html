@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Chat Widget</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: sans-serif;
-        background-color: #f9f9f9;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="ConnectyCube_chat-widget"></div>
+<head>
+  <meta charset="UTF-8" />
+  <title>ConnectyCube Chat Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- React + ConnectyCube Scripts -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/connectycube@4/dist/connectycube.min.js"></script>
-    <script src="https://unpkg.com/@connectycube/chat-widget@latest/dist/index.umd.js"></script>
+  <!-- React + ReactDOM UMD -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 
-    <script>
-      // Wait until all scripts are fully loaded
-      window.addEventListener('DOMContentLoaded', () => {
-        const chatWidgetContainer = document.getElementById('ConnectyCube_chat-widget');
+  <!-- ConnectyCube Core SDK -->
+  <script src="https://unpkg.com/connectycube@4/dist/connectycube.min.js"></script>
 
-        const props = {
-          appId: 9309,
-          authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA',
-          userId: '45',
-          userName: 'Samuel',
-          showOnlineUsersTab: false,
-          splitView: true,
-        };
+  <!-- ConnectyCube Chat Widget UMD -->
+  <script src="https://unpkg.com/@connectycube/chat-widget@latest/dist/index.umd.js"></script>
 
-        const widget = React.createElement(ConnectyCubeChatWidget, props);
-        ReactDOM.createRoot(chatWidgetContainer).render(widget);
-      });
-    </script>
-  </body>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    #ConnectyCube_chat-widget {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Placeholder container for the widget -->
+  <div id="ConnectyCube_chat-widget"></div>
+
+  <script>
+    const props = {
+      appId: 9309,
+      authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA',
+      userId: '45', // Replace with dynamic user id
+      userName: 'Samuel', // Visible user name
+      showOnlineUsersTab: true,
+      splitView: true,
+    };
+
+    ReactDOM.createRoot(
+      document.getElementById("ConnectyCube_chat-widget")
+    ).render(
+      React.createElement(ConnectyCubeChatWidget, props)
+    );
+  </script>
+
+</body>
 </html>
+
 
