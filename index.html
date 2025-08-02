@@ -2,37 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ConnectyCube Chat Widget</title>
+    <title>Chat Widget</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f9f9f9;
+      }
+    </style>
   </head>
   <body>
-    <!-- Chat widget will mount here -->
     <div id="ConnectyCube_chat-widget"></div>
 
-    <!-- Load required scripts -->
+    <!-- React + ConnectyCube Scripts -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/connectycube@4/dist/connectycube.min.js"></script>
     <script src="https://unpkg.com/@connectycube/chat-widget@latest/dist/index.umd.js"></script>
 
-    <!-- Initialize the chat widget -->
     <script>
-      const chatWidgetContainer = document.getElementById("ConnectyCube_chat-widget");
+      // Wait until all scripts are fully loaded
+      window.addEventListener('DOMContentLoaded', () => {
+        const chatWidgetContainer = document.getElementById('ConnectyCube_chat-widget');
 
-      const props = {
-        appId: 9309,
-        authKey: "DC761F30-188A-4C40-AE39-0CB2085DD2BA",
-        userId: "45", // Your user ID
-        userName: "Samuel", // Display name
-        showOnlineUsersTab: false,
-        splitView: true,
-      };
+        const props = {
+          appId: 9309,
+          authKey: 'DC761F30-188A-4C40-AE39-0CB2085DD2BA',
+          userId: '45',
+          userName: 'Samuel',
+          showOnlineUsersTab: false,
+          splitView: true,
+        };
 
-      ReactDOM.createRoot(chatWidgetContainer).render(
-        React.createElement(ConnectyCubeChatWidget, props)
-      );
+        const widget = React.createElement(ConnectyCubeChatWidget, props);
+        ReactDOM.createRoot(chatWidgetContainer).render(widget);
+      });
     </script>
   </body>
 </html>
-
 
